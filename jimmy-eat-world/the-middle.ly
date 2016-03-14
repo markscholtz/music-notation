@@ -4,6 +4,27 @@
   title = "Jimmy Eat World - The Middle"
 }
 
+
+% ===========================================================================%
+%                       Customized Drum Notations                            %
+%                                                                            %
+%  Taken from The Lilypond Cookbook blog:                                    %
+%  http://lilypond-cookbook.tumblr.com/post/75485862838/drum-music-template  %
+% ===========================================================================%
+#(define md '(
+  (ridecymbal   cross    #f  5)(ridebell     xcircle  #f  5)
+  (crashcymbal  cross    #f  6)(splashcymbal harmonic #f  6)
+  (pedalhihat   cross    #f -5)(hihat        cross    #f  5)
+  (snare        default  #f  1)(sidestick    cross    #f  1)
+  (lowmidtom    default  #f  0)(lowtom       default  #f -1)
+  (hightom      default  #f  3)(bassdrum     default  #f -3)
+))
+setDrumstyle = \set DrumStaff.drumStyleTable=#(alist->hash-table md)
+
+
+% ================================ %
+%          Song Structure          %
+% ================================ %
 \markup { Intro (8) }
 \markup { Verse (16) }
 \markup { Chorus (8) }
@@ -21,6 +42,7 @@
 % ================================ %
 
 verse = \drummode {
+  \setDrumstyle
   \stemUp {
     <hh bd>8^"Verse" hh <sn hh> hh <hh bd> hh <hh sn> hh |
     <hh bd>8 hh <sn hh> hh <hh bd> hh <hh sn> <hh bd> |
@@ -33,6 +55,7 @@ verse = \drummode {
 % ================================ %
 
 chorus = \drummode {
+  \setDrumstyle
   \stemUp {
     <hh bd>8^"Chorus" hh <hh sn> hh <hh bd> <hh bd> <hh sn> <hh bd> |
     hh8 <hh bd> <hh sn> <hh bd> <hh bd> <hh bd> <hh sn> <hh tomh>16 <hh tomh> |
@@ -42,6 +65,7 @@ chorus = \drummode {
 }
 
 chorus-no-hihats = \drummode {
+  \setDrumstyle
   \stemUp {
     bd4^"Chorus (no hihats)" sn bd8 bd sn bd |
     r8 bd sn bd bd bd sn tomh16 tomh |
@@ -49,16 +73,18 @@ chorus-no-hihats = \drummode {
 }
 
 mid-chorus-fill = \drummode {
+  \setDrumstyle
   \stemUp {
-    bd4^"Mid chorus fill" sn bd sn |
-    bd4 sn bd8 sn sn sn |
+    <hh bd>8^"Mid chorus fill" hh <hh sn> hh <hh bd> hh <hh sn> hh |
+    <hh bd>8 hh <hh sn> hh <hh bd> <hh sn> <hh sn> <hh sn> |
   }
 }
 
 end-chorus-fill = \drummode {
+  \setDrumstyle
   \stemUp {
-    bd4^"End chorus fill" sn bd sn |
-    bd8 sn16 sn sn sn sn sn sn sn sn sn sn sn sn sn |
+    <hh bd>8^"End chorus fill" hh <hh sn> hh <hh bd> hh <hh sn> hh |
+    <hh bd>8_"R" sn16_"R" sn sn sn sn sn sn sn sn sn sn sn sn sn |
   }
 }
 
@@ -68,6 +94,7 @@ end-chorus-fill = \drummode {
 % ================================ %
 
 mid-solo-fill = \drummode {
+  \setDrumstyle
   \stemUp
   \set countPercentRepeats = ##t
   \set repeatCountVisibility = #(every-nth-repeat-count-visible 4)
@@ -81,6 +108,7 @@ mid-solo-fill = \drummode {
  }
 
 end-solo-fill = \drummode {
+  \setDrumstyle
   \stemUp
   \set countPercentRepeats = ##t
   \set repeatCountVisibility = #(every-nth-repeat-count-visible 4)
@@ -99,6 +127,7 @@ end-solo-fill = \drummode {
 % ================================ %
 
 outro = \drummode {
+  \setDrumstyle
   \stemUp {
     <hh bd>8^"Outro" <hh bd> <hh sn> <hh bd> <hh sn> <hh bd> <hh bd> <hho sn> |
   }
@@ -111,9 +140,25 @@ outro = \drummode {
 
 \new DrumStaff \verse
 \new DrumStaff \chorus
-\new DrumStaff \chorus-no-hihats
+% \new DrumStaff \chorus-no-hihats
 \new DrumStaff \mid-chorus-fill
 \new DrumStaff \end-chorus-fill
 \new DrumStaff \mid-solo-fill
 \new DrumStaff \end-solo-fill
 \new DrumStaff \outro
+
+\layout {\context {\DrumStaff \numericTimeSignature}}
+
+
+% ================================ %
+%        Page Customizations       %
+% ================================ %
+\paper{
+  #(set-paper-size "letter")
+  indent=#0
+  line-width=#200
+  oddFooterMarkup=##f
+  %oddHeaderMarkup=##f
+  %bookTitleMarkup = ##f
+  %scoreTitleMarkup = ##f
+}
