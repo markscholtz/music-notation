@@ -15,13 +15,11 @@ up = \drummode {
 }
 
 \score {
-  <<
-    \new DrumStaff <<
-      \new DrumVoice {
-        \voiceOne \up
-      }
-    >>
-  >>
+  \new DrumStaff {
+    \new DrumVoice {
+      \voiceOne \up
+    }
+  }
 
   \layout {}
 }
