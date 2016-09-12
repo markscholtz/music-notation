@@ -67,3 +67,13 @@ up = \drummode {
 
   \layout {}
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   PAGE CUSTOMIZATIONS   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paper{
+  #(set-paper-size "letter")
+  indent=#0
+  line-width=#200
+  oddFooterMarkup=##f
+}
