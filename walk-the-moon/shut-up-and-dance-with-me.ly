@@ -4,6 +4,11 @@
   title = "Walk The Moon — Shut Up And Dance With Me"
 }
 
+%%%%%%%%%%%%
+%   TODO   %
+%%%%%%%%%%%%
+% - Add indicators for when other instruments come in (e.g. "+lyrics 'blah blah blah...'").
+
 up = \drummode {
   \stemUp
   \override Beam #'positions = #'(5 . 5)
