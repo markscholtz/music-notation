@@ -6,6 +6,7 @@
 
 up = \drummode {
   \override Beam #'positions = #'(5 . 5)
+  \numericTimeSignature
   \set countPercentRepeats = ##t
 
   %%%%%%%%%%%%%
