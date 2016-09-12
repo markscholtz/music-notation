@@ -5,6 +5,7 @@
 }
 
 up = \drummode {
+  \stemUp
   \override Beam #'positions = #'(5 . 5)
   \numericTimeSignature
   \set countPercentRepeats = ##t
@@ -62,11 +63,7 @@ up = \drummode {
 }
 
 \score {
-  \new DrumStaff {
-    \new DrumVoice {
-      \voiceOne \up
-    }
-  }
+  \new DrumStaff \up
 
   \layout {}
 }
