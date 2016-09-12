@@ -1,5 +1,11 @@
 \version "2.18.2"
 
+% ===========================================================================%
+%                       Customized Drum Notations                            %
+%                                                                            %
+%  Taken from The Lilypond Cookbook blog:                                    %
+%  http://lilypond-cookbook.tumblr.com/post/75485862838/drum-music-template  %
+% ===========================================================================%
 #(define mydrums '(
                     ( ridecymbal    cross    #f   5)
                     ( ridecymbala   xcircle  #f   5)
@@ -14,12 +20,12 @@
                     ( hightom       default  #f   3)
                     ( bassdrum      default  #f  -3)))
 
+%=============================%
+%   Common Note Head Styles   %
+%=============================%
 common-note-heads = \drummode {
   \stemUp
 
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %   COMMON NOTE HEAD STYLES   %
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   {
     sn4
     \override NoteHead #'style = #'cross sn4
@@ -32,12 +38,12 @@ common-note-heads = \drummode {
   }
 }
 
+%=========================%
+%   Default Note Layout   %
+%=========================%
 default-note-layout = \drummode {
   \stemUp
 
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %   DEFAULT NOTE LAYOUT   %
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%
   {
     sn4^"snare" ss s2
     bd4^"bass" s hh^"hat" hhp
@@ -48,12 +54,12 @@ default-note-layout = \drummode {
   }
 }
 
+%============================%
+%   Customized Note Layout   %
+%============================%
 customized-note-layout = \drummode {
   \stemUp
 
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %   CUSTOMIZED NOTE LAYOUT   %
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   {
     sn4^"snare" ss s2
     bd4^"bass" s hh^"hat" hhp
@@ -86,9 +92,9 @@ customized-note-layout = \drummode {
 }
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   PAGE CUSTOMIZATIONS   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%=========================%
+%   Page Customizations   %
+%=========================%
 \paper{
   #(set-paper-size "letter")
   indent=#0
