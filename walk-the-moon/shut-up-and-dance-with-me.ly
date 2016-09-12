@@ -4,9 +4,23 @@
   title = "Walk The Moon — Shut Up And Dance With Me"
 }
 
-%%%%%%%%%%%%
+#(define mydrums '(
+                    ( ridecymbal    cross    #f   5)
+                    ( ridecymbala   xcircle  #f   5)
+                    ( crashcymbal   cross    #f   6)
+                    ( splashcymbal  harmonic #f   6)
+                    ( pedalhihat    cross    #f  -5)
+                    ( hihat         cross    #f   5)
+                    ( snare         default  #f   1)
+                    ( sidestick     cross    #f   1)
+                    ( lowmidtom     default  #f   0)
+                    ( lowtom        default  #f  -1)
+                    ( hightom       default  #f   3)
+                    ( bassdrum      default  #f  -3)))
+
+%==========%
 %   TODO   %
-%%%%%%%%%%%%
+%==========%
 % - Add indicators for when other instruments come in (e.g. "+lyrics 'blah blah blah...'").
 
 up = \drummode {
@@ -15,9 +29,9 @@ up = \drummode {
   \numericTimeSignature
   \set countPercentRepeats = ##t
 
-  %%%%%%%%%%%%%
-  %   INTRO   %
-  %%%%%%%%%%%%%
+  %===========%
+  %   Intro   %
+  %===========%
   { r1 \mark "Intro" | r1 | }
   \repeat percent 3 {
     bd4 bd bd bd |
@@ -29,9 +43,9 @@ up = \drummode {
   }
   \break
 
-  %%%%%%%%%%%%%
-  %   VERSE   %
-  %%%%%%%%%%%%%
+  %===========%
+  %   Verse   %
+  %===========%
   \repeat percent 2 {
     bd4 \mark "Verse" bd bd bd |
     bd4 bd bd <bd sn> |
@@ -46,9 +60,9 @@ up = \drummode {
   }
   \break
 
-  %%%%%%%%%%%%%%%%%%
-  %   PRE-CHORUS   %
-  %%%%%%%%%%%%%%%%%%
+  %================%
+  %   Pre-chorus   %
+  %================%
   {
     r8 \mark "Pre-chorus" bd <sn hhho>[ bd] <bd hhho>4 <sn hhho> |
     hhho8[ bd] <sn hhho>[ bd] <bd hhho>[ bd] <sn hhho>[ bd] |
@@ -57,9 +71,9 @@ up = \drummode {
   }
   \break
 
-  %%%%%%%%%%%%%%
-  %   CHORUS   %
-  %%%%%%%%%%%%%%
+  %============%
+  %   Chorus   %
+  %============%
   \set countPercentRepeats = ##t
   \set repeatCountVisibility = #(every-nth-repeat-count-visible 4)
   \repeat percent 8 {
@@ -68,14 +82,17 @@ up = \drummode {
 }
 
 \score {
-  \new DrumStaff \up
+  \new DrumStaff {
+    \set DrumStaff.drumStyleTable = #(alist->hash-table mydrums)
+    \up
+  }
 
   \layout {}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   PAGE CUSTOMIZATIONS   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%=========================%
+%   Page Customizations   %
+%=========================%
 \paper{
   #(set-paper-size "letter")
   indent=#0
