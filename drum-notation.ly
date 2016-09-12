@@ -14,7 +14,7 @@
                     ( hightom       default  #f   3)
                     ( bassdrum      default  #f  -3)))
 
-up = \drummode {
+common-note-heads = \drummode {
   \stemUp
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,7 +30,10 @@ up = \drummode {
     \override NoteHead #'style = #'triangle sn4
     s
   }
-  \break
+}
+
+default-note-layout = \drummode {
+  \stemUp
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%
   %   DEFAULT NOTE LAYOUT   %
@@ -43,13 +46,15 @@ up = \drummode {
     tommh4^"5 pc" tomml tomfh s
     cymc4^"cymbals" cyms chinesecymbal s
   }
-  \break
+}
 
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %   DEFAULT NOTE LAYOUT - WITH CUSTOMIZATION   %
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+customized-note-layout = \drummode {
+  \stemUp
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %   CUSTOMIZED NOTE LAYOUT   %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   {
-    \set DrumStaff.drumStyleTable = #(alist->hash-table mydrums)
     sn4^"snare" ss s2
     bd4^"bass" s hh^"hat" hhp
     cymr4^"ride" cymra s2
@@ -59,7 +64,27 @@ up = \drummode {
   }
 }
 
-\score { << \new DrumStaff << \up >> >> }
+\score {
+  \header { piece = "Common Note Head Styles" }
+
+  \new DrumStaff \common-note-heads
+}
+
+\score {
+  \header { piece = "Default Note Layout" }
+
+  \new DrumStaff \default-note-layout
+}
+
+\score {
+  \header { piece = "Customized Note Layout" }
+
+  \new DrumStaff {
+    \set DrumStaff.drumStyleTable = #(alist->hash-table mydrums)
+    \customized-note-layout
+  }
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   PAGE CUSTOMIZATIONS   %
